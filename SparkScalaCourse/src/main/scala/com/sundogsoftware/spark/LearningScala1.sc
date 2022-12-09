@@ -11,7 +11,7 @@
 
    // Data Types
 
-   val numberOne: Int = 1
+   val numberOne: Int = 2
    val truth: Boolean = true
    val letterA: Char = 'a'
    val pi: Double = 3.14159265
