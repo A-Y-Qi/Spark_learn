@@ -1,0 +1,3 @@
+*.sbt
+SparkScalaCourse/lib/
+*.exe
