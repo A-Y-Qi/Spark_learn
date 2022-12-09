@@ -2,4 +2,3 @@ lib/
 target/
 winutils.exe
 build.sbt
-.idea/
