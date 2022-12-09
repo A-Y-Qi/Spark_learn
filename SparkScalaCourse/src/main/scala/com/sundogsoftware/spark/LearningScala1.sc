@@ -1,5 +1,5 @@
    // VALUES are immutable constants.
-   val hello: String = "Hola!"
+   val hello: String = "Hello!"
 
    // VARIABLES are mutable
    var helloThere: String = hello
