@@ -28,8 +28,8 @@
 
    println(s"The s prefix isn't limited to variables; I can include any expression. Like ${1+2}")
 
-   val theUltimateAnswer: String = "To life, the universe, and everything is 42."
-   val pattern = """.* ([\d]+).*""".r
+   val theUltimateAnswer: String = "To life, the universe, and everything is 42.19."
+   val pattern = """.* (\d+).*""".r // \d - any 整型 in the string
    val pattern(answerString) = theUltimateAnswer
    val answer = answerString.toInt
    println(answer)
@@ -37,7 +37,7 @@
    // Booleans
    val isGreater = 1 > 2
    val isLesser = 1 < 2
-   val impossible = isGreater & isLesser
+   val impossible = isGreater && isLesser
    val anotherWay = isGreater || isLesser
 
    val picard: String = "Picard"
@@ -47,3 +47,6 @@
    // EXERCISE
    // Write some code that takes the value of pi, doubles it, and then prints it within a string with
    // three decimal places of precision to the right.
+
+   val two_pi: Double = pi*2.0
+   println(f"the number is $two_pi%.3f")
