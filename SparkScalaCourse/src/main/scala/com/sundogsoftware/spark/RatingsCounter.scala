@@ -3,8 +3,13 @@ package com.sundogsoftware.spark
 import org.apache.spark._
 import org.apache.log4j._
 
+/**
+ * Log4j records events – errors and routine system operations
+ * and communicates diagnostic messages about them to system administrators and users
+ */
+
 /** Count up how many of each star rating exists in the MovieLens 100K data set. */
-object RatingsCounter {
+object RatingsCounter{
  
   /** Our main function where the action happens */
   def main(args: Array[String]) {
@@ -23,7 +28,8 @@ object RatingsCounter {
     val ratings = lines.map(x => x.split("\t")(2))
     
     // Count up how many times each value (rating) occurs
-    val results = ratings.countByValue()
+    val results = ratings.countByValue() //results is a Map value
+    println(results)
     
     // Sort the resulting map of (rating, count) tuples
     val sortedResults = results.toSeq.sortBy(_._1)

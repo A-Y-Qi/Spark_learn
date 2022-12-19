@@ -22,10 +22,10 @@ object DataFramesDataset {
 
     // Convert our csv file to a DataSet, using our Person case
     // class to infer the schema.
-    import spark.implicits._
+    import spark.implicits._ //need it whenever a schema is being inferred
     val people = spark.read
-      .option("header", "true")
-      .option("inferSchema", "true")
+      .option("header", "true") // since in the header we have the four attributes
+      .option("inferSchema", "true") // infer the header as schema
       .csv("data/fakefriends.csv")
       .as[Person]
 

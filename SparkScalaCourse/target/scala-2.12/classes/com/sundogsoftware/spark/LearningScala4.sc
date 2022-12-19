@@ -34,7 +34,7 @@ val backwardShips = shipList.map( (ship: String) => {ship.reverse})
 for (ship <- backwardShips) {println(ship)}
 
 // reduce() to combine together all the items in a collection using some function
-val numberList = List(1, 2, 3, 4,5 )
+val numberList = List(1, 2, 3, 4, 5)
 val sum = numberList.reduce( (x: Int, y: Int) => x + y)
 println(sum)
 
@@ -67,3 +67,10 @@ println(archersShip)
 // modula operator, like other languages, is %, which gives you the remainder after division. For example, 9 % 3 = 0
 // because 9 is evenly divisible by 3.) Do this first by iterating through all the items in the list and testing each
 // one as you go. Then, do it again by using a filter function on the list instead.
+val Nums = List(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)
+val Nums2 = List.range(1,21)
+for (num <- Nums2){println(num)}
+for (num <- Nums){if(num%3==0){println(num)}}
+
+val ThreeLovers=Nums.filter(_%3==0)
+println(ThreeLovers)

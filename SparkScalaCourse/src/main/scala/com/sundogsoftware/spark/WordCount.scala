@@ -20,12 +20,19 @@ object WordCount {
     
     // Split into words separated by a space character
     val words = input.flatMap(x => x.split(" "))
+
+    // Try to make all letters lower case
+    val words2 = words.map(x => x.toLowerCase())
+
     
     // Count up the occurrences of each word
     val wordCounts = words.countByValue()
+
+    val wordCounts2 = words2.countByValue()
     
     // Print the results.
-    wordCounts.foreach(println)
+    //wordCounts.foreach(println)
+    wordCounts2.foreach(println)
   }
   
 }

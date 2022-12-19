@@ -31,6 +31,7 @@ object FriendsByAge {
     
     // Use our parseLines function to convert to (age, numFriends) tuples
     val rdd = lines.map(parseLine)
+
     
     // Lots going on here...
     // We are starting with an RDD of form (age, numFriends) where age is the KEY and numFriends is the VALUE

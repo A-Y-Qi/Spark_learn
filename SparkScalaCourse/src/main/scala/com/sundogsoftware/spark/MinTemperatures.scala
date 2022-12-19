@@ -2,7 +2,7 @@ package com.sundogsoftware.spark
 
 import org.apache.spark._
 import org.apache.log4j._
-import scala.math.min
+import scala.math._
 
 /** Find the minimum temperature by weather station */
 object MinTemperatures {
