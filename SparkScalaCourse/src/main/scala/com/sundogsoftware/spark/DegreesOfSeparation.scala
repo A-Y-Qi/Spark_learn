@@ -85,7 +85,7 @@ object DegreesOfSeparation {
         // If so increment our accumulator so the driver script knows.
         if (targetCharacterID == connection) {
           if (hitCounter.isDefined) {
-            hitCounter.get.add(1)
+            hitCounter.get.add(1) //因为option所以要用get才行
           }
         }
         
@@ -175,7 +175,7 @@ object DegreesOfSeparation {
     // character in our BFS traversal.
     hitCounter = Some(sc.longAccumulator("Hit Counter"))
     
-    var iterationRdd = createStartingRdd(sc)
+    var iterationRdd = createStartingRdd(sc) //inputFile.map(convertToBFS)
 
     for (iteration <- 1 to 10) {
       println("Running BFS Iteration# " + iteration)

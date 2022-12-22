@@ -2,7 +2,7 @@ package com.sundogsoftware.spark
 
 import org.apache.log4j._
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions.{col, udf}
+import org.apache.spark.sql.functions.{col, desc, udf}
 import org.apache.spark.sql.types.{IntegerType, LongType, StructType}
 
 import scala.io.{Codec, Source}
@@ -81,7 +81,7 @@ object PopularMoviesNicerDataset {
     val moviesWithNames = movieCounts.withColumn("movieTitle", lookupNameUDF(col("movieID")))
 
     // Sort the results
-    val sortedMoviesWithNames = moviesWithNames.sort("count")
+    val sortedMoviesWithNames = moviesWithNames.sort(col("count")).orderBy(desc("count"))
 
     // Show the results without truncating it
     sortedMoviesWithNames.show(sortedMoviesWithNames.count.toInt, truncate = false)

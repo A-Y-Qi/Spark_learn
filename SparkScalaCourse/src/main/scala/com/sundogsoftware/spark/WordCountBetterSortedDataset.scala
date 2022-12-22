@@ -24,7 +24,7 @@ object WordCountBetterSortedDataset {
 
     // Read each line of my book into an Dataset
     import spark.implicits._
-    val input = spark.read.text("data/book.txt").as[Book]
+    val input = spark.read.text("data/book.txt").as[Book] //注意这里需要 .txt
 
     // Split using a regular expression that extracts words
     val words = input
@@ -41,7 +41,7 @@ object WordCountBetterSortedDataset {
     val wordCountsSorted = wordCounts.sort("count")
 
     // Show the results.
-    wordCountsSorted.show(wordCountsSorted.count.toInt)
+    wordCountsSorted.show(wordCountsSorted.count.toInt) //注意这里 wordCountsSorted.count 是long，而show的input必须是int
 
 
     // ANOTHER WAY TO DO IT (Blending RDD's and Datasets)
@@ -53,6 +53,8 @@ object WordCountBetterSortedDataset {
     val wordCountsDS = lowercaseWordsDS.groupBy("word").count()
     val wordCountsSortedDS = wordCountsDS.sort("count")
     wordCountsSortedDS.show(wordCountsSortedDS.count.toInt)
+
+    spark.stop()
 
   }
 }

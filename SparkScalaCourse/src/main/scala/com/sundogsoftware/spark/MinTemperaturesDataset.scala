@@ -23,6 +23,7 @@ object MinTemperaturesDataset {
       .master("local[*]")
       .getOrCreate()
 
+    // we dont have a header here, so we need to construct a header
     val temperatureSchema = new StructType()
       .add("stationID", StringType, nullable = true)
       .add("date", IntegerType, nullable = true)
@@ -47,7 +48,7 @@ object MinTemperaturesDataset {
 
     // Convert temperature to fahrenheit and sort the dataset
     val minTempsByStationF = minTempsByStation
-      .withColumn("temperature", round($"min(temperature)" * 0.1f * (9.0f / 5.0f) + 32.0f, 2))
+      .withColumn("temperature", round($"min(temperature)" * 0.1f * (9.0f / 5.0f) + 32.0f, 2)) // add a new column by withColumn
       .select("stationID", "temperature").sort("temperature")
 
     // Collect, format, and print the results

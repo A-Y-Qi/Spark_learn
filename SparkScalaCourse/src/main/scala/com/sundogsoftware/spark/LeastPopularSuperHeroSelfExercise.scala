@@ -1,26 +1,27 @@
 package com.sundogsoftware.spark
 
-import org.apache.log4j._
+
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.{IntegerType, StringType, StructType}
 
-/** Find the superhero with the most co-appearances. */
-object MostPopularSuperheroDataset {
+object LeastPopularSuperHeroSelfExercise {
 
   case class SuperHeroNames(id: Int, name: String)
+
   case class SuperHero(value: String)
- 
+
   /** Our main function where the action happens */
   def main(args: Array[String]) {
-   
+
     // Set the log level to only print errors
     Logger.getLogger("org").setLevel(Level.ERROR)
 
     // Create a SparkSession using every core of the local machine
     val spark = SparkSession
       .builder
-      .appName("MostPopularSuperhero")
+      .appName("LeastPopularSuperhero")
       .master("local[*]")
       .getOrCreate()
 
@@ -46,17 +47,23 @@ object MostPopularSuperheroDataset {
       .withColumn("connections", size(split(col("value"), " ")) - 1)
       .groupBy("id").agg(sum("connections").alias("connections"))
 
-    val mostPopular = connections
-        .sort($"connections".desc)
-        .first()
+    val minConnectionCount = connections.agg(min("connections")).first().getLong(0)
+    //getLong -> get any values as Long
 
-    val mostPopularName = names
-      .filter($"id" === mostPopular(0))
-      .select("name")
-      .first()
+    val obscureConnection = connections.filter($"connections" === minConnectionCount)
 
-    println(s"${mostPopularName(0)} is the most popular superhero with ${mostPopular(1)} co-appearances.")
+    //We do join after filter because join is very expensive
+    val obscureConnectionWithNames = obscureConnection.join(names, usingColumn = "id")
+
+    println("The following characters have only" + minConnectionCount + "connection(s):")
+    obscureConnectionWithNames.select("name").show
+
 
     spark.stop()
   }
+
+
+
+
+
 }
